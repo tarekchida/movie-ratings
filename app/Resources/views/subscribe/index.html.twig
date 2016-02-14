@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-2"></div>
+        {{ form_start(form, {'attr': {'id': 'subscribe_form'}}) }}
+
+        <div class="col-lg-8">
+            <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+            <div class="form-group">
+                <label for="name">Nom</label>
+                <div class="input-group">
+                    {{ form_widget(form.name) }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Prénom</label>
+                <div class="input-group">
+                    {{ form_widget(form.lastName) }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="login">Nom d'utilisateur</label>
+                <div class="input-group">
+                    {{ form_widget(form.login) }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-group">
+                    {{ form_widget(form.email) }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <div class="input-group">
+                    {{ form_widget(form.password) }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                </div>     
+            </div>  
+            <div class="form-group">
+                <label for="password">Vérification mot de passe</label>
+                <div class="input-group">
+                    <input type="password" id="form_password_verif" name="form[password_verif]" required="required" class="form-control">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                </div>     
+            </div>              
+
+            <div class="form-group">
+                <label for="image">Photo</label>
+                <div class="input-group">                    
+                    {{ form_widget(form.image) }} 
+                </div>      
+            </div>                
+
+            <div class="form-group">
+                <label for="movieTypes">Vos style de films </label>
+                <div class="input-group">
+                    {{ form_widget(form.movieTypes) }}                      
+                    <span class="input-group-addon"><span class="glyphicon  glyphicon-asterisk"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="movieNumber">Nombre de films que vous regarder par semaine </label>
+                <div class="input-group">
+                    {{ form_widget(form.movieNumber) }}                      
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+
+                </div>
+            </div>                
+            {{ form_row(form._token) }}
+            {{ form_widget(form.subscribe) }}  
+
+        </div>
+        {{ form_end(form, {'render_rest': false}) }}
+        <div class="col-lg-2"></div>
+    </div>
+
+{% endblock %}

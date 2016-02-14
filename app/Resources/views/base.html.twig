@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet"   href="{{ asset('assets/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet"   href="{{ asset('assets/css/main.css') }}">
+</head>
+<body
+    <div class="container">
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form name="loginForm" id='loginForm'method="POST">
+
+                        <div class="form-group">
+                            <label for="loginModal"><span class="glyphicon glyphicon-user"></span> Nom d'utilisateur</label>
+                            <input type="text" class="form-control" id="loginModal"  name="loginModal" placeholder="Nom d'utilisateur">
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordModal"><span class="glyphicon glyphicon-eye-open"></span> Mot de passe</label>
+                            <input type="password" class="form-control" id="passwordModal" name="passwordModal" placeholder="Mot de passe">
+                        </div> 
+                        <div class='login-error'>Erreur d'authentification</div>
+                        <button type="submit" class="btn btn-default btn-success btn-block" id="login"><span class="glyphicon glyphicon-off"></span> Login</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>        
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Movie Ratings</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Rechercher</button>
+                    </form>
+                    {% set name = app.session.get('name') %}
+                    {% set lastName = app.session.get('lastName') %}
+                    {% set image = app.session.get('Image') %}
+ 
+                   <ul class="mr-header nav navbar-nav navbar-right">
+                        <li class="notConntected">
+                            <p class="navbar-btn">
+                                <a href="/subscribe" id="subscribeButton" class="btn btn-primary">Inscription</a>
+                            </p>
+                        </li> 
+                        <li class="notConntected">
+                            <p class="navbar-btn">
+                                <button id="loginButton" class="btn btn-success"  data-toggle="modal" data-target="#myModal">Login</button>
+                            </p>
+                        </li> 
+                        <li class="connected">
+                            <p class="navbar-btn">
+                                Welcom 
+                            </p>
+                        </li> 
+
+                    </ul>
+
+                </div> 
+            </div>
+        </nav>
+    {% block body %}{% endblock %}
+</div>
+{% block javascripts %}{% endblock %}
+<script type="text/javascript" src="{{ asset('assets/jquery/dist/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/validation.message.fr.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
+
+
+</body>
+</html>

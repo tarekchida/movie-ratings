@@ -1,0 +1,20 @@
+
+_welcome:
+    path:      /
+    defaults:  { _controller: AppBundle:Index:index }
+ 
+index_index:
+    path:      /index/
+    defaults:  { _controller: AppBundle:Index:index }
+    
+subscribe_index:
+    path:      /subscribe/
+    defaults:  { _controller: AppBundle:Subscribe:index }
+    
+subscribe_check:
+    path:      /subscribe/check/
+    defaults:  { _controller: AppBundle:Subscribe:check }    
+    
+subscribe_login:
+    path:      /subscribe/login/
+    defaults:  { _controller: AppBundle:Subscribe:login }        

@@ -1,0 +1,21 @@
+AppBundle\Entity\Rate:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\RateRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        rate:
+            type: float
+        userId:
+            type: integer
+        movieId:
+            type: string
+            length: 255
+        rateDate:
+            type: datetime
+    lifecycleCallbacks: {  }
