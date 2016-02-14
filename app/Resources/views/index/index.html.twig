@@ -1,6 +1,73 @@
 {% extends 'base.html.twig' %}
 
-    {% block body %}
-    
-    hello
-    {% endblock %}
+{% block body %}
+    <form id="sortForm" action="/index/" method="POST">
+        <div class="btn-group pull-right" data-toggle="buttons">
+            <label class="btn btn-primary {%if order=='ASC'%} active {%endif%} ">
+                <input type="radio" name="order" class="toggleSort" id="option1" autocomplete="off"value="ASC" {%if order=='ASC'%} checked {%endif%}> Croissant
+            </label>
+            <label class="btn btn-primary {%if order=='DESC'%} active {%endif%}"  >
+                <input type="radio" name="order" class="toggleSort" id="option2" autocomplete="off" value="DESC" {%if order=='DESC'%} checked {%endif%}> Décroissant
+            </label> 
+        </div>        
+        <div class="form-group">
+            <label for="sort">Trier par : </label>
+            <select class="form-control" id="sort" name="sort" onChange="submit();">
+                <option value="">Par defaut</option>
+                <option value="title" {%if sort=='title'%} selected {%endif%}>Titre</option>
+                <option value="year"  {%if sort=='year'%} selected {%endif%}>Année</option>
+                <option value="director" {%if sort=='director'%} selected {%endif%} >Réalisateur</option
+            </select>
+            </select>
+        </div>
+
+        <input type="hidden" name="search" value="{{ search }}"/>
+    </form>     
+    <div class="row">
+        {% for movie in movies %}
+            <div class="item  col-xs-3 col-lg-3">
+                <div class="thumbnail">
+                    <img class="group list-group-image" src="/images/{{movie.image}}" alt=" {{movie.title |capitalize}}" />
+                    <div class="caption">
+                        <h4 class="group inner list-group-item-heading"> {{movie.title|capitalize}}</h4>
+                        <p class="group inner list-group-item-text">
+                            <strong>Year : </strong> {{movie.year}}  
+                        </p>
+                        <p class="group inner list-group-item-text">
+                            <strong> Réalisateur : </strong> {{movie.director|capitalize}}
+                        </p>
+
+                        <p class="group inner list-group-item-text">
+                            <strong> Note : </strong>  {% if  id != null %}  {%else%} Merci de vous connecter {%endif%}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor  %}
+    </div>
+
+
+
+    <nav>
+        <ul class="pagination">
+            {%for i in 1..totalPages %}
+                {%if loop.first %}
+                    <li  class="{%if currentPage==1%} disabled {%endif%}">
+                        <a href="{{path('index_index',{'page': currentPage - 1})}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {%endif%}
+                <li class="{%if currentPage==loop.index%} active {%endif%}"><a href="{{path('index_index',{'page': loop.index})}}">{{loop.index}}</a></li> 
+                    {%if loop.last %}
+                    <li class="{%if currentPage==totalPages%} disabled {%endif%}">
+                        <a href="{{path('index_index',{'page': currentPage + 1})}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {%endif %}  
+            {%endfor%}
+        </ul>
+    </nav>
+
+{% endblock %}

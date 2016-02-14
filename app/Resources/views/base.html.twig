@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Movie Ratings!{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet"   href="{{ asset('assets/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -46,33 +46,45 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                    <form class="navbar-form navbar-left" role="search">
+                    <form class="navbar-form navbar-left" role="search" method="POST" action="/index/">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" class="form-control"name="search" placeholder="Titre, Réalisateur, Année">
                         </div>
                         <button type="submit" class="btn btn-default">Rechercher</button>
                     </form>
                     {% set name = app.session.get('name') %}
                     {% set lastName = app.session.get('lastName') %}
-                    {% set image = app.session.get('Image') %}
- 
-                   <ul class="mr-header nav navbar-nav navbar-right">
-                        <li class="notConntected">
-                            <p class="navbar-btn">
-                                <a href="/subscribe" id="subscribeButton" class="btn btn-primary">Inscription</a>
-                            </p>
-                        </li> 
-                        <li class="notConntected">
-                            <p class="navbar-btn">
-                                <button id="loginButton" class="btn btn-success"  data-toggle="modal" data-target="#myModal">Login</button>
-                            </p>
-                        </li> 
-                        <li class="connected">
-                            <p class="navbar-btn">
-                                Welcom 
-                            </p>
-                        </li> 
+                    {% set image = app.session.get('image') %}
+                    {% set id = app.session.get('id') %}
 
+                    <ul class="mr-header nav navbar-nav navbar-right">
+                        {% if  id == null %} 
+                            <li>
+                                <p class="navbar-btn">
+                                    <a href="/subscribe" id="subscribeButton" class="btn btn-primary">Inscription</a>
+                                </p>
+                            </li> 
+                            <li>
+                                <p class="navbar-btn">
+                                    <button id="loginButton" class="btn btn-success"  data-toggle="modal" data-target="#myModal">Login</button>
+                                </p>
+                            </li> 
+                        {% else %}
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Bienveue <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>         
+                                        <div class="text-center"> {{ name }} {{ lastName }} </div>
+
+                                        <div class="thumbnail media-right">
+                                            <img src="/uploads/avatars/{{ image }}" alt="{{ name }} {{ lastName }}" title="{{ name }} {{ lastName }}">
+                                        </div>
+                                    </li> 
+                                    <li> <a href="/subscribe/logout" id="logoutButton "class="btn btn-primary btn-xs">Déconnection</a></li> 
+                                </ul>
+                            </li>
+                        {% endif %}
                     </ul>
 
                 </div> 

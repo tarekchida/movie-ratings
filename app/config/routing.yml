@@ -18,3 +18,6 @@ subscribe_check:
 subscribe_login:
     path:      /subscribe/login/
     defaults:  { _controller: AppBundle:Subscribe:login }        
+subscribe_logout:
+    path:      /subscribe/logout/
+    defaults:  { _controller: AppBundle:Subscribe:logout }      

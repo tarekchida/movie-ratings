@@ -76,14 +76,9 @@ class SubscribeController extends Controller {
                 $user->setMovieTypes(implode(",", $user->getMovieTypes()));
                 $user->setCreatedAt(new \DateTime('now'));
                 $user->setEditedAt(new \DateTime('now'));
-
-
-                // $em = $this->getDoctrine()->getManager();
-                //$em->persist($user);
-                //$em->flush();
-                // return $this->redirect($this->generateUrl('index_index'));
+                return $this->redirectToRoute('index_index');
             } else {
-                die('Nooo');
+                
             }
         }
 
@@ -129,6 +124,14 @@ class SubscribeController extends Controller {
         }
 
         return $response;
+    }
+
+    public function logoutAction(Request $request) {
+        $session = new Session();
+
+        $session->clear();
+
+        return $this->redirectToRoute('index_index');
     }
 
 }
