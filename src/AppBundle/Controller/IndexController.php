@@ -39,47 +39,36 @@ class IndexController extends Controller {
         }
 
         $em = $this->getDoctrine()->getManager();
-        $rsm = new ResultSetMapping();
+        /*   $rsm = new ResultSetMapping();
 
-        $qb = $em->createQueryBuilder();
+          $qb = $em->createQueryBuilder();
 
-        $qb->select('m')
-                ->addSelect('AVG(r.rate) AS avg_rate')
-                ->from('AppBundle:Movie', 'm')
-                ->join('AppBundle:Rate', 'r')
-                ->where('m.id = r.movie_id')
-                ->orderBy('m.id', 'desc')
-                ->groupBy('m.id');
-        $query = $qb->getQuery();
-
-        /* $subquery = $em->createQuery('SELECT r.movie_id, AVG(r.rate) AS avg_rate FROM AppBundle:Rate AS r GROUP BY r.movie_id');
-          $repository = $this->getDoctrine()
-          ->getRepository('AppBundle:Movie');
-
-          $query = $repository->createQueryBuilder('m')
-          ->leftJoin($subquery, "r")
+          $qb->select('m')
+          ->addSelect('AVG(r.rate) AS avg_rate')
+          ->from('AppBundle:Movie', 'm')
+          ->join('AppBundle:Rate', 'r')
           ->where('m.id = r.movie_id')
-          ->gtoupBy('m.id')
-          ->getQuery(); */
-        $products = $query->getResult();
-        var_dump($products);
-        die;
+          ->orderBy('m.id', 'desc')
+          ->groupBy('m.id');
+          $query = $qb->getQuery();
+         */
 
-        /*   if (empty($search)) {
-          $query = $em->createQuery('SELECT m FROM AppBundle:Movie m
+
+        if (empty($search)) {
+            $query = $em->createQuery('SELECT m FROM AppBundle:Movie m
           ORDER BY m.' . $sort . ' ' . $order . '');
-          } else {
-          $parameters = array(
-          'searchTitle' => '%' . $search . '%',
-          'searchYear' => '%' . $search . '%',
-          'searchDir' => '%' . $search . '%'
-          );
+        } else {
+            $parameters = array(
+                'searchTitle' => '%' . $search . '%',
+                'searchYear' => '%' . $search . '%',
+                'searchDir' => '%' . $search . '%'
+            );
 
-          $query = $em->createQuery('SELECT m FROM AppBundle:Movie m
+            $query = $em->createQuery('SELECT m FROM AppBundle:Movie m
           WHERE m.title LIKE :searchTitle OR m.year LIKE :searchYear
           OR m.director LIKE :searchDir ORDER BY m.' . $sort . '   ' . $order . '')
-          ->setParameters($parameters);
-          } */
+                    ->setParameters($parameters);
+        }
         $query = $query->setFirstResult($offset)
                 ->setMaxResults($countPerPage);
 
